@@ -1,6 +1,4 @@
-// ===================================================
-// 🧠 AuthPage.jsx — Connected to MongoDB via Backend
-// ===================================================
+
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
