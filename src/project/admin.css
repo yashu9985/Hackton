@@ -1,0 +1,42 @@
+/* ===================================================
+   👩‍🏫 ADMIN PAGE — Perfect Center Alignment FIXED VERSION
+   =================================================== */
+.admin-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;     /* Vertically center */
+  align-items: center;         /* Horizontally center */
+  height: 100vh;               /* Full height of viewport */
+  width: 100vw;                /* Full width */
+  text-align: center;
+  background-color: #0e1421;   /* Background same as student */
+  color: white;
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Headings */
+.admin-page h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.admin-page p {
+  color: #bfc7d5;
+  margin-bottom: 25px;
+  font-size: 1rem;
+}
+
+/* Centered Card */
+.card {
+  background-color: #161d2f;
+  border-radius: 15px;
+  padding: 25px 30px;
+  width: 600px;
+  max-width: 90%;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+  text-align: left;
+}

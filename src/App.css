@@ -1,0 +1,282 @@
+/* ===================================================
+   🎨 STYLE.CSS — Perfectly Centered AuthPage
+   =================================================== */
+
+/* 🌍 Overall page setup */
+.auth-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #141a27;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+}
+
+/* 🏠 Splash screen container */
+.splash-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 🏷️ Title text */
+.splash-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  letter-spacing: 1px;
+}
+
+/* 🧩 Logo */
+.logo-container {
+  margin: 10px 0 25px 0;
+}
+
+.logo-img {
+  width: 150px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+/* 🔘 Login/Signup buttons */
+.button-group {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 10px 30px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background-color: white;
+  color: #141a27;
+}
+
+/* 🔐 Auth Box (Login & Signup form) */
+.auth-box {
+  background-color: #1c2333;
+  padding: 30px 40px;
+  border-radius: 15px;
+  width: 350px;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 🏷️ Input labels */
+label {
+  margin: 10px 0 5px;
+  font-size: 0.9rem;
+  color: #dcdcdc;
+  align-self: flex-start;
+}
+
+/* ✏️ Inputs and dropdowns */
+input,
+select {
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: none;
+  background-color: #333b4d;
+  color: white;
+  font-size: 1rem;
+  width: 100%;
+}
+
+input::placeholder {
+  color: #bbb;
+}
+
+/* 🧩 Buttons inside forms */
+.auth-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  width: 100%;
+  transition: background-color 0.3s;
+}
+
+.auth-btn:hover {
+  background-color: #005fcc;
+}
+
+/* 🧾 Switch between login/signup */
+.auth-switch {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+.auth-switch a {
+  color: #4f9eff;
+  text-decoration: none;
+}
+
+.auth-switch a:hover {
+  text-decoration: underline;
+}
+
+/* 📱 Responsive tweaks */
+@media (max-width: 500px) {
+  .auth-box {
+    width: 90%;
+    padding: 25px;
+  }
+
+  .splash-title {
+    font-size: 1.8rem;
+  }
+
+  .logo-img {
+    width: 120px;
+  }
+}
+
+/* ===================================================
+   👩‍🏫 ADMIN PAGE LAYOUT + SCROLL FIX
+   =================================================== */
+
+/* Entire admin layout (with sidebar) */
+.student-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #0e1421;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  overflow-y: auto; /* ✅ Allows page scrolling */
+}
+
+/* Sidebar stays fixed */
+.sidebar {
+  width: 230px;
+  background-color: #10182a;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+
+/* Sidebar title and buttons */
+.sidebar-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+.sidebar button {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 1rem;
+  padding: 10px 15px;
+  text-align: left;
+  width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.sidebar button:hover {
+  background-color: #1b2540;
+}
+
+.logout {
+  color: #ff5b5b;
+}
+
+.logout:hover {
+  background-color: #ff5b5b;
+  color: white;
+}
+
+/* Main content area */
+.content {
+  flex: 1;
+  margin-left: 250px; /* ✅ Leave space for sidebar */
+  padding: 40px;
+  box-sizing: border-box;
+  overflow-y: auto; /* ✅ Scroll content if large */
+  max-height: 100vh;
+}
+
+.card {
+  background-color: #161d2f;
+  border-radius: 15px;
+  padding: 25px 30px;
+  margin-bottom: 25px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+.submission {
+  margin-bottom: 25px;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: #1b2235;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+.submission input,
+.submission textarea {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.submission label {
+  display: block;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #dcdcdc;
+}
+
+.button-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Scrollbar Styling */
+.content::-webkit-scrollbar {
+  width: 10px;
+}
+
+.content::-webkit-scrollbar-thumb {
+  background: #2b3753;
+  border-radius: 10px;
+}
+
+.content::-webkit-scrollbar-thumb:hover {
+  background: #3e4b6d;
+}
