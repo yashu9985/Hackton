@@ -1,5 +1,5 @@
 // ============================================================
-// 🧑‍🏫 admin.jsx — Admin (Madam) Dashboard Page
+// 🧑‍🏫 admin.jsx — Admin Dashboard Page
 // ============================================================
 
 import React, { useState, useEffect } from "react";
@@ -7,20 +7,58 @@ import "./style.css";
 
 export default function AdminDashboard() {
   const [myProjects, setMyProjects] = useState([]);
+  const [adminName, setAdminName] = useState("Admin"); // 👉 default
 
-  // ✅ Load projects for this admin
-  useEffect(() => {
-    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    if (!currentUser || currentUser.role !== "admin") {
-      window.location.href = "/";
-      return;
+  const getDisplayName = (user) => {
+    if (!user) return "Admin";
+    if (user.username && user.username.trim() !== "") return user.username;
+    if (user.email) {
+      const beforeAt = user.email.split("@")[0];
+      return beforeAt.charAt(0).toUpperCase() + beforeAt.slice(1);
     }
+    return "Admin";
+  };
 
-    const allProjects = JSON.parse(localStorage.getItem("projects") || "[]");
-    const assignedToMe = allProjects.filter(
-      (p) => p.assignedAdmin === currentUser.email
-    );
-    setMyProjects(assignedToMe);
+  // ✅ Load projects for this admin + check session timeout + set name
+  useEffect(() => {
+    const checkSessionAndLoad = () => {
+      const currentUserRaw = localStorage.getItem("currentUser");
+      const currentUser = currentUserRaw ? JSON.parse(currentUserRaw) : null;
+      const sessionExpiry = localStorage.getItem("sessionExpiry");
+
+      // ❌ Not logged in / not admin / no session / session over
+      if (
+        !currentUser ||
+        currentUser.role !== "admin" ||
+        !sessionExpiry ||
+        Date.now() > Number(sessionExpiry)
+      ) {
+        localStorage.removeItem("currentUser");
+        localStorage.removeItem("sessionExpiry");
+        alert("Session expired. Please login again.");
+        window.location.href = "/";
+        return;
+      }
+
+      // 👇 set welcome name
+      setAdminName(getDisplayName(currentUser));
+
+      // 👇 load projects
+      const allProjects = JSON.parse(localStorage.getItem("projects") || "[]");
+      const assignedToMe = allProjects.filter(
+        (p) => p.assignedAdmin === currentUser.email
+      );
+      setMyProjects(assignedToMe);
+    };
+
+    // Run immediately
+    checkSessionAndLoad();
+
+    // Then check every 1 minute
+    const intervalId = setInterval(checkSessionAndLoad, 60 * 1000);
+
+    // Cleanup
+    return () => clearInterval(intervalId);
   }, []);
 
   // ✅ Update marks & feedback
@@ -46,9 +84,10 @@ export default function AdminDashboard() {
     localStorage.setItem("projects", JSON.stringify(allProjects));
     alert("✅ Project updated successfully!");
 
-    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const currentUserRaw = localStorage.getItem("currentUser");
+    const currentUser = currentUserRaw ? JSON.parse(currentUserRaw) : null;
     const assignedToMe = allProjects.filter(
-      (p) => p.assignedAdmin === currentUser.email
+      (p) => p.assignedAdmin === currentUser?.email
     );
     setMyProjects(assignedToMe);
   };
@@ -56,19 +95,58 @@ export default function AdminDashboard() {
   // ✅ Logout
   const handleLogout = () => {
     localStorage.removeItem("currentUser");
+    localStorage.removeItem("sessionExpiry");
     window.location.href = "/";
   };
 
   return (
-    <div className="student-layout">
+    <div
+      className="student-layout"
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        height: "100vh",
+        width: "100vw",
+        maxWidth: "100vw",
+        margin: 0,
+        padding: 0,
+        boxSizing: "border-box",
+        overflow: "hidden", // no outer scrollbars
+        backgroundColor: "#0e1421",
+        color: "white",
+        fontFamily: "Poppins, sans-serif",
+      }}
+    >
       {/* ====================== */}
       {/* Main Content */}
       {/* ====================== */}
-      <div className="content">
-        <h2>Welcome Madam 👩‍🏫</h2>
+      <div
+        className="content"
+        style={{
+          flex: 1, // ⭐ main trick: takes all remaining space
+          padding: "24px 40px",
+          overflowY: "auto", // ⭐ scrollbar belongs here
+          overflowX: "hidden",
+          boxSizing: "border-box",
+        }}
+      >
+        {/* 👇 Dynamic name from username/email */}
+        <h2>Welcome {adminName} 👋</h2>
         <p>Review and provide feedback for your assigned student projects.</p>
 
-        <div className="card">
+        <div
+          className="card"
+          style={{
+            backgroundColor: "#161d2f",
+            borderRadius: "15px",
+            padding: "24px 28px",
+            width: "100%",
+            maxWidth: "900px", // ⭐ wider
+            margin: "16px auto",
+            boxShadow: "0 0 20px rgba(255, 255, 255, 0.05)",
+            textAlign: "left",
+          }}
+        >
           <h3>📁 Assigned Projects</h3>
 
           {myProjects.length === 0 ? (
@@ -135,10 +213,25 @@ export default function AdminDashboard() {
       {/* ====================== */}
       {/* Sidebar (At the End) */}
       {/* ====================== */}
-      <div className="sidebar">
+      <div
+        className="sidebar"
+        style={{
+          width: "260px",
+          minWidth: "260px",
+          backgroundColor: "#0b101b",
+          padding: "24px 16px",
+          boxSizing: "border-box",
+          borderLeft: "1px solid #222",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "stretch",
+        }}
+      >
         <h2 className="sidebar-title">📘 Menu</h2>
         <nav>
-          <button onClick={() => (window.location.href = "/admin")}>🏠 Home</button>
+          <button onClick={() => (window.location.href = "/admin")}>
+            🏠 Home
+          </button>
           <button className="logout" onClick={handleLogout}>
             📤 Logout
           </button>

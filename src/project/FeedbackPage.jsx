@@ -29,6 +29,11 @@ export default function FeedbackPage() {
     navigate("/");
   };
 
+  // 🔙 Back button handler
+  const handleBackToHome = () => {
+    navigate("/student"); // student home route
+  };
+
   // 📈 Convert marks to progress percentage
   const getProgress = (marks) => {
     if (marks === null || marks === undefined) return 20;
@@ -40,7 +45,8 @@ export default function FeedbackPage() {
   };
 
   return (
-    <div className="student-layout">
+    // 👇 hook into your feedback-specific CSS
+    <div id="feedback-layout" className="student-layout feedback-page">
       {/* Sidebar */}
       <aside className="sidebar">
         <h2 className="sidebar-title">📘 Menu</h2>
@@ -55,6 +61,11 @@ export default function FeedbackPage() {
 
       {/* Main Feedback Section */}
       <main className="content">
+        {/* 🔙 Back Button */}
+        <button className="back-btn" onClick={handleBackToHome}>
+          ⬅ Back to Home
+        </button>
+
         <h2>📊 Feedback & Progress Tracker</h2>
         <p>View your project evaluations, remarks, and performance progress.</p>
 

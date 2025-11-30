@@ -224,12 +224,15 @@ input::placeholder {
 /* Main content area */
 .content {
   flex: 1;
-  margin-left: 250px; /* ✅ Leave space for sidebar */
+  margin-left: 250px;
   padding: 40px;
   box-sizing: border-box;
-  overflow-y: auto; /* ✅ Scroll content if large */
+  background-color: #0e1421; /* keep layout perfect */
   max-height: 100vh;
+  height: auto;       /* allow entire page to scroll */
+  overflow-y: visible; /* remove internal scrollbar */
 }
+
 
 .card {
   background-color: #161d2f;
@@ -279,4 +282,26 @@ input::placeholder {
 
 .content::-webkit-scrollbar-thumb:hover {
   background: #3e4b6d;
+}
+.captcha-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0 12px 0;
+}
+
+.captcha-text {
+  padding: 6px 12px;
+  letter-spacing: 4px;
+  font-weight: 600;
+  border: 1px dashed #555;
+  border-radius: 4px;
+  user-select: none;
+}
+
+.captcha-refresh {
+  border: none;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 4px;
 }

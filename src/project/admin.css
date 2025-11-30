@@ -1,42 +1,74 @@
 /* ===================================================
-   👩‍🏫 ADMIN PAGE — Perfect Center Alignment FIXED VERSION
+   👩‍🏫 ADMIN + STUDENT LAYOUT (SIDEBAR + MAIN)
    =================================================== */
-.admin-page {
+
+.student-layout {
   display: flex;
-  flex-direction: column;
-  justify-content: center;     /* Vertically center */
-  align-items: center;         /* Horizontally center */
-  height: 100vh;               /* Full height of viewport */
-  width: 100vw;                /* Full width */
-  text-align: center;
-  background-color: #0e1421;   /* Background same as student */
-  color: white;
+  flex-direction: row;       /* content + sidebar side by side */
+  height: 100vh;
+  width: 100vw;              /* full width of screen */
+  max-width: 100vw;
+  background-color: #0e1421; /* dark background */
+  color: #ffffff;
   font-family: "Poppins", sans-serif;
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  box-sizing: border-box;
+  overflow: hidden;          /* prevent double scrollbars */
 }
 
-/* Headings */
-.admin-page h2 {
-  font-size: 2rem;
-  font-weight: 700;
+/* Main scrollable content area */
+.content {
+  flex: 1;                   /* take remaining space */
+  padding: 24px 40px;
+  overflow-y: auto;          /* ✅ scrollbar belongs here, at far right */
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* Sidebar on the right */
+.sidebar {
+  width: 260px;
+  min-width: 260px;
+  background-color: #0b101b;
+  padding: 24px 16px;
+  box-sizing: border-box;
+  border-left: 1px solid #222;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* Sidebar title & buttons (optional, but nice) */
+.sidebar-title {
+  font-size: 1.3rem;
+  margin-bottom: 16px;
+}
+
+.sidebar nav button {
+  width: 100%;
+  padding: 10px 14px;
   margin-bottom: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: #161d2f;
+  color: #ffffff;
+  cursor: pointer;
+  text-align: left;
 }
 
-.admin-page p {
-  color: #bfc7d5;
-  margin-bottom: 25px;
-  font-size: 1rem;
+.sidebar nav button.logout {
+  background-color: #b3261e;
 }
 
-/* Centered Card */
-.card {
+/* Main card in content (Admin "Assigned Projects" + also ok for student) */
+.content .card {
   background-color: #161d2f;
   border-radius: 15px;
-  padding: 25px 30px;
-  width: 600px;
-  max-width: 90%;
+  padding: 24px 28px;
+  width: 100%;           /* take all available width */
+  max-width: 900px;      /* but don't become super huge */
+  margin: 16px auto;     /* center horizontally */
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
   text-align: left;
 }

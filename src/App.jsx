@@ -1,22 +1,11 @@
-// ============================================================
-// 🚀 App.jsx — React Router Connection Between All Pages
-// ============================================================
-// 🌟 This file connects all your main pages together:
-//   - Login & Signup (AuthPage.jsx)
-//   - Student Dashboard (student.jsx)
-//   - Admin Dashboard (admin.jsx)
-//   - Feedback Page (FeedbackPage.jsx)
-// ============================================================
 
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-// Import your pages
 import AuthPage from "./project/Authpage";
 import StudentDashboard from "./project/student";
 import AdminDashboard from "./project/admin";
-import FeedbackPage from "./project/feedbackpage"; // ✅ Added feedback page
-
+import FeedbackPage from "./project/feedbackpage"; 
 function App() {
   return (
     <Router>
